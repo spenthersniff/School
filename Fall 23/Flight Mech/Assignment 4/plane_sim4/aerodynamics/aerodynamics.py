@@ -7,14 +7,17 @@ from numpy import tan as tn
 from numpy import exp as E
 
 class forces_moments:
+    # blending function
     def sigma(junk,alpha):
         return (1+E(-M*(alpha-alpha0))+E(M*(alpha+alpha0)))/((1+E(-M*(alpha-alpha0)))*(1+E(M*(alpha+alpha0))))
    
     def CLalpha(self, alpha):
-        return (1-self.sigma(alpha))*(C_L_0+C_L_alpha*alpha)+self.sigma(alpha)*(2*np.sign(alpha)*((s(alpha))**2)*C(alpha))
+        # return (1-self.sigma(alpha))*(C_L_0+C_L_alpha*alpha)+self.sigma(alpha)*(2*np.sign(alpha)*((s(alpha))**2)*C(alpha))
+        return C_L_0+C_L_alpha*alpha
    
     def CDalpha(junk,alpha):
-        return C_D_p+((C_L_0+C_L_alpha*alpha)**2)/(np.pi*e*AR)
+        # return C_D_p+((C_L_0+C_L_alpha*alpha)**2)/(np.pi*e*AR)
+        return C_D_0+C_D_alpha*alpha
    
     def Cx(self, alpha):
         return -self.CDalpha(alpha)*C(alpha)+self.CLalpha(alpha)*s(alpha)

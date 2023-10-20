@@ -121,7 +121,6 @@ class ComputeTrim:
         d_e=(((jxz*(p**2-r**2)+(jx-jz)*p*r)/(0.5*rho*(Va**2)*c*S_wing))-C_m_0-C_m_alpha*alpha-C_m_q*((c*q)/(2*Va)))/C_m_delta_e
         
         d_t=np.sqrt(((2*mass*(-r*v+q*w+gravity*sin(theta))-rho*(Va**2)*S_wing*(C_X+C_X_q*((c*q)/(2*Va))+C_X_delta_e*d_e))/(rho*S_prop*C_prop*k_motor**2))+((Va**2)/(k_motor**2)))
-        print(d_t)
         temp_1=np.linalg.inv(np.array([[C_ell_delta_a, C_ell_delta_r],
                         [C_n_delta_a, C_n_delta_r]]))
         temp_2=np.array([[((-gamma1*p*q+gamma2*q*r)/(0.5*rho*(Va**2)*S_wing*b))-C_ell_0-C_ell_beta*beta-C_ell_p*((b*p)/(2*Va))-C_ell_r*((b*r)/(2*Va))],

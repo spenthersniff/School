@@ -40,6 +40,7 @@ states0=np.array([[0.], #pn
 ts_simulation = 0.01  # smallest time step for simulation
 start_time = 0.  # start time for simulation
 end_time = 500.  # end time for simulation
+ts_plotting = 0.1
 
 ## aerodynamic parameters
 S_wing        = 0.55
