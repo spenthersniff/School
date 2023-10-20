@@ -95,7 +95,7 @@ R=P.R
 alpha_0=0.0
 beta_0=0.0
 
-x_trim, u_trim = trim.compute_trim(Va, Y, R, alpha_0, beta_0)
+x_trim, u_trim = trim.compute_trim(Va, Y, R)
 d_e, d_t, d_a, d_r = u_trim.flatten()
 
 pn = 0
@@ -111,7 +111,7 @@ p = x_trim.item(9)
 q = x_trim.item(10)
 r = x_trim.item(11)
 
-print("--- Trim Conditions ---")
+print("Trim Conditions")
 print(f"E: {np.degrees(d_e):.2f} deg")
 print(f"T: {d_t*100:.2f} %")
 print(f"A: {np.degrees(d_a):.2f} deg")

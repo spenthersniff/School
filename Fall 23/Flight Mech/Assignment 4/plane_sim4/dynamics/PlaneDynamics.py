@@ -60,15 +60,15 @@ class MAVDynamics:
         pndot = u*c(theta)*c(psi)+v*(s(phi)*s(theta)*c(psi)-c(phi)*s(psi))+w*(c(phi)*s(theta)*c(psi)+s(phi)*s(psi))
         pedot = u*c(theta)*s(psi)+v*(s(phi)*s(theta)*s(psi)+c(phi)*c(psi))+w*(c(phi)*s(theta)*s(psi)-s(phi)*c(psi))
         pddot = u*(-s(theta))+v*s(phi)*c(theta)+w*c(phi)*c(theta)
-        udot = r*v-q*w+(fx/P.mass)
-        vdot = p*w-r*u+(fy/P.mass)
-        wdot = q*u-p*v+(fz/P.mass)
+        udot = r*v-q*w+(fx/self.mass)
+        vdot = p*w-r*u+(fy/self.mass)
+        wdot = q*u-p*v+(fz/self.mass)
         phidot = p+q*s(phi)*tn(theta)+r*c(phi)*tn(theta)
         thetadot = q*c(phi)-r*s(phi)
         psidot = q*s(phi)/c(theta)+r*c(phi)/c(theta)
-        pdot = P.g1*p*q-P.g2*q*r+P.g3*l+P.g4*n
-        qdot = P.g5*p*r-P.g6*(p**2-r**2)+m/P.jy
-        rdot = P.g7*p*q-P.g1*q*r+P.g4*l+P.g8*n
+        pdot = self.g1*p*q-self.g2*q*r+self.g3*l+self.g4*n
+        qdot = self.g5*p*r-self.g6*(p**2-r**2)+m/self.jy
+        rdot = self.g7*p*q-self.g1*q*r+self.g4*l+self.g8*n
         # build xdot and return
         # print(pndot)
         # print(pedot)
