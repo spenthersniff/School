@@ -106,7 +106,8 @@ class ComputeTrim:
         q=(Va/R)*sin(phi)*cos(theta)
         r=(Va/R)*cos(phi)*cos(theta)
         
-        x_trim=np.array([0,0,0,u,v,w,phi,theta,0,p,q,r])
+        x_trim=np.array([0.,0.,0.,u,v,w,phi,theta,0,p,q,r])
+        # x_trim=np.array([[0.],[0.],[0.],[u],[v],[w],[phi],[theta],[0],[p],[q],[r]])
 
         C_L=C_L_0+C_L_alpha*alpha
         C_D=C_D_0+C_D_alpha*alpha
@@ -132,8 +133,8 @@ class ComputeTrim:
         
         d_r=temp_3[1][0]
         
-        
-        u_trim=np.array([d_e,d_t,d_a,d_r])
+        u_trim=np.array([d_e,d_t,d_a,d_r],dtype=float)
+        # u_trim=np.array([[d_e],[d_t],[d_a],[d_r]],dtype=float)
     # print("Trimmed [a*,B*,phi*]:")
     # print(x_trim)
         return (x_trim, u_trim)
@@ -173,14 +174,14 @@ class ComputeTrim:
         #f_x, f_y, f_z, tau_phi, tau_theta, tau_psi=forces_moments(x_trim, d_e, d_a, d_r, d_t)
         f_x, f_y, f_z = self.forces_mom.forces(x_trim, alpha, beta, d_a, d_e, d_r, d_t, Va)
         l, m, n = self.forces_mom.moments(x_trim, alpha, beta, d_a, d_e, d_r, d_t, Va)
-        f_m = np.array([[f_x],[f_y],[f_z],[l],[m],[n]], dtype=float)
-        #print('fx=',f_x,'fy=', f_y, 'fz=', f_z, 'l=',tau_phi, 'm=',tau_theta, 'n=',tau_psi)
-        U=f_m
+        # f_m = np.array([[f_x],[f_y],[f_z],[l],[m],[n]], dtype=float)
+        # print('fx=',f_x,'fy=', f_y, 'fz=', f_z, 'l=',tau_phi, 'm=',tau_theta, 'n=',tau_psi)
+        # U=f_m
         #U=np.array([f_x,f_y,f_z,tau_phi,tau_theta,tau_psi])
         
         #trimmed_inputs=np.array([d_e,d_t,d_a,d_r])
-
         states_dot=self.mav.f(x_trim, f_x, f_y, f_z, l, m, n) # 
+        
         
 
         J=np.linalg.norm(x_dot-states_dot)**2

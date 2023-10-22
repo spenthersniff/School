@@ -15,24 +15,16 @@ import keyboard
 
 state=SIM.states0
 plane_anim=plane_animation(state, scale=5)
-uav=MAVDynamics(alpha=0.0)
+uav=MAVDynamics()
 Vs=np.array([[0.],[0.],[0.]])
 trim=ComputeTrim()
 wind=wind(Vs)
 forces_moments=forces_moments()
-da=0
-de=0
-dr=0
-dt=0.5
+# da=0
+# de=0
+# dr=0
+# dt=0.5
 
-# create subplots
-# angles=plane_anim.fig.add_subplot(5,2,9)
-# translations=plane_anim.fig.add_subplot(5,2,2)
-# anglerate=plane_anim.fig.add_subplot(5,2,10)
-# translationrate=plane_anim.fig.add_subplot(5,2,6)
-# forces=plane_anim.fig.add_subplot()
-# moments=plane_anim.fig.add_subplot()
-# deflections=plane_anim.fig.add_subplot()
 
 forces = plane_anim.fig.add_subplot(3,3,2)
 forcep = forces.get_position(); forcep.x0 += 0.1; forcep.x1 += 0.075; forces.set_position(forcep)
@@ -89,11 +81,9 @@ print("Press Command-Q to exit...")
 
 
 
-Va=P.Va
-Y=P.Y
-R=P.R
-alpha_0=0.0
-beta_0=0.0
+Va=35.0
+Y=np.radians(0)
+R=np.inf
 
 x_trim, u_trim = trim.compute_trim(Va, Y, R)
 d_e, d_t, d_a, d_r = u_trim.flatten()
@@ -110,7 +100,7 @@ psi = x_trim.item(8)
 p = x_trim.item(9)
 q = x_trim.item(10)
 r = x_trim.item(11)
-
+print(x_trim)
 print("Trim Conditions")
 print(f"E: {np.degrees(d_e):.2f} deg")
 print(f"T: {d_t*100:.2f} %")
@@ -120,18 +110,20 @@ print(f"R: {np.rad2deg(d_r):.2f} deg")
 state0 = np.array([[pn], [pe], [pd], [u], [v], [w], [phi], [theta], [psi], [p], [q], [r]])
 uav.state = np.ndarray.copy(state0)
 
+
 Va = np.sqrt(u**2 + v**2 + w**2)
-    
+
+
 while sim_time < SIM.end_time:
     t_next_plot = sim_time + P.ts_plotting
     while sim_time < t_next_plot:
         Va, alpha, beta = wind.wendy(uav.state, Va, sim_time)
+        # print(np.degrees(alpha),np.degrees(beta))
         fx, fy, fz = forces_moments.forces(uav.state, alpha, beta, d_a, d_e, d_r, d_t, Va)
         l, m, n = forces_moments.moments(uav.state, alpha, beta, d_a, d_e, d_r, d_t, Va)
-        y = uav.update(fx, fy, fz, l, m, n)
-        pn, pe, pd, u, v, w, phi, theta, psi, p, q, r = y.flatten()
+        state = uav.update(fx, fy, fz, l, m, n)
+        pn, pe, pd, u, v, w, phi, theta, psi, p, q, r = state.flatten()
         plane_anim.update(pn, pe, pd, phi, theta, psi)
-        print(u)
 
         # store data in lists from earlier
         simtime.append(sim_time)

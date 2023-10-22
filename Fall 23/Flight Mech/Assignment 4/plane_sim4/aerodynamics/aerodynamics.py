@@ -8,33 +8,33 @@ from numpy import exp as E
 
 class forces_moments:
     # blending function
-    def sigma(junk,alpha):
+    def sigma(self,alpha):
         return (1+E(-M*(alpha-alpha0))+E(M*(alpha+alpha0)))/((1+E(-M*(alpha-alpha0)))*(1+E(M*(alpha+alpha0))))
    
     def CLalpha(self, alpha):
         # return (1-self.sigma(alpha))*(C_L_0+C_L_alpha*alpha)+self.sigma(alpha)*(2*np.sign(alpha)*((s(alpha))**2)*C(alpha))
         return C_L_0+C_L_alpha*alpha
    
-    def CDalpha(junk,alpha):
+    def CDalpha(self,alpha):
         # return C_D_p+((C_L_0+C_L_alpha*alpha)**2)/(np.pi*e*AR)
         return C_D_0+C_D_alpha*alpha
    
     def Cx(self, alpha):
         return -self.CDalpha(alpha)*C(alpha)+self.CLalpha(alpha)*s(alpha)
    
-    def Cxq(junk,alpha):
+    def Cxq(self,alpha):
         return -C_D_q*C(alpha)+C_L_q*s(alpha)
    
-    def Cxde(junk,alpha):
+    def Cxde(self,alpha):
         return -C_D_delta_e*C(alpha)+C_L_delta_e*s(alpha)
    
     def Cz(self, alpha):
         return -self.CDalpha(alpha)*s(alpha)-self.CLalpha(alpha)*C(alpha)
    
-    def Czq(junk,alpha):
+    def Czq(self,alpha):
         return -C_D_q*s(alpha)-C_L_q*C(alpha)
    
-    def Czde(junk,alpha):
+    def Czde(self,alpha):
         return -C_D_delta_e*s(alpha)-C_L_delta_e*C(alpha)
     
     def forces(self, state, alpha, beta, da, de, dr, dt, Va):
@@ -62,6 +62,7 @@ class forces_moments:
                                             [self.Cz(alpha)+self.Czq(alpha)*c*q/(2*Va)+self.Czde(alpha)*de]])
         prop=0.5*rho*S_prop*C_prop*np.array([[((k_motor*dt)**2)-(Va**2)], [0], [0]])
         forces=gravy+aero+prop
+        # fx, fy, fz = forces.flatten()
         return forces
     
     def moments(self, state, alpha, beta, da, de, dr, dt, Va):

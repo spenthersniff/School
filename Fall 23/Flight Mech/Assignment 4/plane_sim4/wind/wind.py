@@ -45,7 +45,7 @@ class wind():
         # q = state[10,0]
         # r = state[11,0]
         pn, pe, pd, u, v, w, phi, theta, psi, p, q, r = state.flatten()
-        wind = v_to_b(phi,theta,psi)*self.Vs+self.Dryden(Va, sim_time)
+        wind = v_to_b(phi,theta,psi)*self.Vs+self.Dryden(sim_time, Va)
 
         aspeed=np.array([[u-wind[0][0]],
                          [v-wind[1][0]],
@@ -54,6 +54,7 @@ class wind():
         # vr=v-wind[1][0]
         # wr=w-wind[2][0]
         ur, vr, wr = aspeed.flatten()
+        Va=np.sqrt(ur**2 + vr**2 + wr**2)
         alpha=np.arctan(wr/ur)
         beta=np.arcsin(vr/Va)
         return Va, alpha, beta
