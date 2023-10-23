@@ -11,6 +11,7 @@ from dynamics.PlaneDynamics import MAVDynamics
 from trim.compute_trim import ComputeTrim
 from wind.wind import *
 from aerodynamics.aerodynamics import *
+from compute_gains.compute_gains import Compute_Gains
 import keyboard
 
 state=SIM.states0
@@ -20,6 +21,7 @@ Vs=np.array([[0.],[0.],[0.]])
 trim=ComputeTrim()
 wind=wind(Vs)
 forces_moments=forces_moments()
+gain=Compute_Gains()
 # da=0
 # de=0
 # dr=0
@@ -100,7 +102,80 @@ psi = x_trim.item(8)
 p = x_trim.item(9)
 q = x_trim.item(10)
 r = x_trim.item(11)
-print(x_trim)
+
+# # Phugoid Mode
+# pn = 0
+# pe = 0
+# pd = -100
+# u = x_trim.item(3) - 10
+# v = x_trim.item(4)
+# w = x_trim.item(5)
+# phi = x_trim.item(6)
+# theta = x_trim.item(7)*10
+# psi = x_trim.item(8)
+# p = x_trim.item(9)
+# q = x_trim.item(10) + 10
+# r = x_trim.item(11)
+
+# # Short Period Mode
+# pn = 0
+# pe = 0
+# pd = -100
+# u = x_trim.item(3) + 10
+# v = x_trim.item(4)
+# w = x_trim.item(5)
+# phi = x_trim.item(6)
+# theta = x_trim.item(7)
+# psi = x_trim.item(8)
+# p = x_trim.item(9)
+# q = x_trim.item(10) + 10
+# r = x_trim.item(11)   
+
+# # Roll Mode
+# pn = 0
+# pe = 0
+# pd = -100
+# u = x_trim.item(3) 
+# v = x_trim.item(4)
+# w = x_trim.item(5)
+# phi = x_trim.item(6)
+# theta = x_trim.item(7)
+# psi = x_trim.item(8)
+# p = x_trim.item(9) + 10
+# q = x_trim.item(10)
+# r = x_trim.item(11)
+
+# # Dutch Roll Mode
+# pn = 0
+# pe = 0
+# pd = -100
+# u = x_trim.item(3) 
+# v = x_trim.item(4)
+# w = x_trim.item(5)
+# phi = x_trim.item(6) + 10
+# theta = x_trim.item(7)
+# psi = x_trim.item(8)
+# p = x_trim.item(9)*10
+# q = x_trim.item(10)
+# r = x_trim.item(11)*10
+
+# # Spiral Mode
+# pn = 0
+# pe = 0
+# pd = -100
+# u = x_trim.item(3) 
+# v = x_trim.item(4)
+# w = x_trim.item(5)
+# phi = x_trim.item(6)
+# theta = x_trim.item(7)
+# psi = x_trim.item(8)
+# p = x_trim.item(9)
+# q = x_trim.item(10)
+# r = x_trim.item(11) + 40
+
+T_phi_delta_a, T_chi_phi, T_theta_delta_e, T_h_theta, T_h_Va, T_Va_delta_t, T_Va_theta, T_Va_theta, T_beta_delta_r = gain.transfer_functions(x_trim, u_trim)
+A_lat, B_lat, elatvalue, elongvalue = gain.statespace(x_trim, u_trim)
+ 
 print("Trim Conditions")
 print(f"E: {np.degrees(d_e):.2f} deg")
 print(f"T: {d_t*100:.2f} %")
