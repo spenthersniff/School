@@ -30,6 +30,6 @@ t_plot = 0.1  # the plotting and animation is updated at this rate
 # saturation limits
 F_max = 6.0                # Max Force, N
 
-kp = 7.2
-kd = 3.05
-ki = 0.6
+kd = 7.2
+kp = 3.05
+ki = 0.4

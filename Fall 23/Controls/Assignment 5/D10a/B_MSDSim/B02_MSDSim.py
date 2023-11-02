@@ -36,13 +36,18 @@ simtimes=[]
 fs=[]
 zs=[]
 targets=[]
-z_target = 1
+
 
 t = P.t_start  # time starts at t_start
 while t < P.t_end:  # main simulation loop
     t_next_plot = t + P.t_plot
     while t < t_next_plot:    
-    
+        if t<30:
+            z_target = 1
+        elif t<60:
+            z_target = 0
+        else:
+            z_target = -1
         u = Pid.update(z_target, msd.h()[0])
         z=msd.update(u)
         t = t + P.Ts  
