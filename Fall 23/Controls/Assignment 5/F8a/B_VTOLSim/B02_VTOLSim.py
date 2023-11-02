@@ -1,6 +1,6 @@
 import sys
 sys.path.append('.')
-sys.path.append('C:/Users/spenc/OneDrive - University of Cincinnati/2023 Fall/Control Theory/Python/VTOL')
+sys.path.append('C:/Users/spenc/Documents/School/Fall 23/Controls/Assignment 5/F8a')
 import matplotlib.pyplot as plt
 import numpy as np
 import parameters.VTOLParam as P
