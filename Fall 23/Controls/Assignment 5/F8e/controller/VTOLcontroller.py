@@ -42,10 +42,3 @@ class controller:
         # fr, fl = self.saturate(fr, fl)
 
         return fr, fl
-    
-    # def saturate(self, u1, u2):
-    #     if abs(u1) > self.Fmax:
-    #         u1 = self.Fmax*np.sign(u1)
-    #     if abs(u2) > self.Fmax:
-    #         u2 = self.Fmax*np.sign(u2)
-    #     return u1, u2
