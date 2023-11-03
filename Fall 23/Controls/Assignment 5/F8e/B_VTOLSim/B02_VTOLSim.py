@@ -55,8 +55,7 @@ while t < P.t_end:  # main simulation loop
     t_next_plot = t + P.t_plot
     while t < t_next_plot:
         
-        # z_target = 3 + z_signal.square(t)
-        z_target = 3
+        z_target = 3 + z_signal.square(t)
         h_target=5.0
     
         fr, fl=control.update(z_target, h_target, vtol.state)
