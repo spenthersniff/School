@@ -34,9 +34,16 @@ class VTOLAnimation:
         self.limits = limits
 
     def update(self, state):
+        # # test
         z = state[0][0]  # Horizontal position of cart, m
         h = state[1][0]
         theta = state[2][0]
+        
+        # correct
+        # z = state[0][0]  # Horizontal position of cart, m
+        # h = state[2][0]
+        # theta = state[4][0]
+
         # draw plot elements: body, Lprop, Rprop
         self.draw_body(z, h, theta)
         self.draw_Lprop(z, h, theta)

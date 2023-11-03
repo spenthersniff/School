@@ -21,7 +21,8 @@ class controller:
         self.Fmax = P.F_max
 
     def update(self, zc, hc, state):
-        z, zdot, h, hdot, theta, thetadot = state.flatten()
+        # z, zdot, h, hdot, theta, thetadot = state.flatten()
+        z, h, theta, zdot, hdot, thetadot =  state.flatten()
         
         # Theta
         taueq = 0.
@@ -38,13 +39,13 @@ class controller:
         fr = (tau + self.d*f)/(2*self.d)
         fl = f - fr
 
-        fr, fl = self.saturate(fr, fl)
+        # fr, fl = self.saturate(fr, fl)
 
         return fr, fl
     
-    def saturate(self, u1, u2):
-        if abs(u1) > self.Fmax:
-            u1 = self.Fmax*np.sign(u1)
-        if abs(u2) > self.Fmax:
-            u2 = self.Fmax*np.sign(u2)
-        return u1, u2
+    # def saturate(self, u1, u2):
+    #     if abs(u1) > self.Fmax:
+    #         u1 = self.Fmax*np.sign(u1)
+    #     if abs(u2) > self.Fmax:
+    #         u2 = self.Fmax*np.sign(u2)
+    #     return u1, u2

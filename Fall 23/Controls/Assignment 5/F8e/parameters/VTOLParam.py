@@ -17,11 +17,11 @@ hb = 0.5      # Height of the block, m
 
 # Initial Conditions
 z0 = 0.0                # ,m
-h0 = 0
-theta0 = 0
+h0 = 5.0
+theta0 = 0.0
 zdot0 = 0.0             # ,m/s
-hdot0 = 0
-thetadot0 = 0
+hdot0 = 0.0
+thetadot0 = 0.0
 # f0 = 2                  # N
 
 # Simulation Parameters

@@ -4,25 +4,18 @@ import parameters.VTOLParam as P
 class VTOLDynamics:
     def __init__(self, alpha=0.0):
         # Initial state conditions
-        self.state = np.array([
-            [P.z0],  # z initial position
-            [P.zdot0],  # zdot initial velocity
-            [P.h0],
-            [P.hdot0],
-            [P.theta0],
-            [P.thetadot0]
-            ])
-        # simulation time step
+        self.state = np.array([[P.z0], 
+                               [P.h0], 
+                               [P.theta0], 
+                               [P.zdot0], 
+                               [P.hdot0], 
+                               [P.thetadot0]])
         self.Ts = P.Ts
-        # Mass of the cart, kg
-        self.mc = P.mc * (1.+alpha*(2.*np.random.rand()-1.))
-        self.mr = P.mr * (1.+alpha*(2.*np.random.rand()-1.))
-        self.jc = P.jc * (1.+alpha*(2.*np.random.rand()-1.))
-        # Damping coefficient, Ns/m
-        self.mu = P.mu * (1.+alpha*(2.*np.random.rand()-1.))
-        # Spring Constant
-        self.d=P.d * (1.+alpha*(2.*np.random.rand()-1.))
-        # gravity constant is well known, don't change.
+        self.mc = P.mc
+        self.mr = P.mr
+        self.jc = P.jc
+        self.mu = P.mu
+        self.d = P.d
         self.g = P.g
         self.force_limit = P.F_max
 
@@ -37,10 +30,10 @@ class VTOLDynamics:
     def f(self, state, fr, fl):
         # states
         z = state[0][0]
-        zdot = state[1][0]
-        h = state[2][0]
-        hdot = state[3][0]
-        theta = state[4][0]
+        zdot = state[3][0]
+        h = state[1][0]
+        hdot = state[4][0]
+        theta = state[2][0]
         thetadot = state[5][0]
     
         # The equations of motion.
@@ -52,10 +45,10 @@ class VTOLDynamics:
         return xdot
 
     def h(self):
-        # return y = h(x)
         z = self.state[0][0]
-        h = self.state[2][0]
-        theta = self.state[4][0]
+        h = self.state[1][0]
+        theta = self.state[2][0]
+
         y = np.array([[z], [h], [theta]])
         return y
 
