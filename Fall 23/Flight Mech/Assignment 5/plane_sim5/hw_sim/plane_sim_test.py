@@ -16,14 +16,14 @@ import autopilot.autopilot_tem as autopilot
 import keyboard
 
 state=SIM.states0
-plane_anim=plane_animation(state, scale=5)
+plane_anim=plane_animation(scale=5)
 uav=MAVDynamics()
 Vs=np.array([[0.],[0.],[0.]])
 trim=ComputeTrim()
 wind=wind(Vs)
 forces_moments=forces_moments()
 gain=Compute_Gains()
-auto=autopilot.Autopilot(SIM.ts_simulation, 50.0, 1.0)
+auto=autopilot.Autopilot(SIM.ts_simulation, 50.0, 5.0)
 
 # da=0
 # de=0
@@ -83,41 +83,42 @@ drs = []
 # main simulation loop
 print("Press Command-Q to exit...")
 
+# pn, pe, pd, u, v, w, phi, theta, psi, p, q, r = state.flatten()
+
+# state0 = np.array([[pn], [pe], [pd], [u], [v], [w], [phi], [theta], [psi], [p], [q], [r]])
+# uav.state = np.ndarray.copy(state0)
 
 
-
-Va=35.0
-Y=np.radians(0)
-R=np.inf
-
-
-pn, pe, pd, u, v, w, phi, theta, psi, p, q, r = state.flatten()
-
-state0 = np.array([[pn], [pe], [pd], [u], [v], [w], [phi], [theta], [psi], [p], [q], [r]])
-uav.state = np.ndarray.copy(state0)
-
-
-Va = np.sqrt(u**2 + v**2 + w**2)
+Va=SIM.states0[3][0]
 Va_c = 35.0
 h_c = 50.0
 chi_c = np.radians(0.0)
+state=uav.state
 
 
 while sim_time < SIM.end_time:
     t_next_plot = sim_time + P.ts_plotting
     while sim_time < t_next_plot:
         
-        if sim_time>5:
+        if sim_time<5:
+            h_c=50
+        elif sim_time<10:
+           h_c=100
+           Va_c=50
+        elif sim_time>15:        
             chi_c = np.radians(20)
-        Va, alpha, beta = wind.wendy(uav.state, Va, sim_time)
+       
+        pn, pe, pd, u, v, w, phi, theta, psi, p, q, r = state.flatten()
+
+        Va, alpha, beta = wind.wendy(state, Va, sim_time)
         
         U = np.array([sim_time, phi, theta, psi, p, q, r, Va, -pd, Va_c, h_c, chi_c]) 
         d_e, d_a, d_r, d_t= auto.autopilot(U)
 
         fx, fy, fz = forces_moments.forces(uav.state, alpha, beta, d_a, d_e, d_r, d_t, Va)
         l, m, n = forces_moments.moments(uav.state, alpha, beta, d_a, d_e, d_r, d_t, Va)
-        state = uav.update(fx, fy, fz, l, m, n)
-        pn, pe, pd, u, v, w, phi, theta, psi, p, q, r = state.flatten()
+        y = uav.update(fx, fy, fz, l, m, n)
+        pn, pe, pd, u, v, w, phi, theta, psi, p, q, r = y.flatten()
         plane_anim.update(pn, pe, pd, phi, theta, psi)
 
         # store data in lists from earlier

@@ -88,6 +88,7 @@ R=np.inf
 x_trim, u_trim = trim.compute_trim(Va, Y, R)
 
 
+
 Va_trim = np.sqrt(x_trim[3] ** 2 + x_trim[4] ** 2 + x_trim[5] ** 2)
 alpha_trim = np.arctan(x_trim[5] / x_trim[3])
 beta_trim = np.arctan(x_trim[4]/Va_trim)
@@ -166,7 +167,7 @@ kd_airspeed = 0
 ki_airspeed = wn_airspeed**2 / (ktheta_DC * gravity)
 
 # Airspeed from Throttle
-tr_throttle = 15
+tr_throttle = 15.0
 wn_throttle = 2.2 / tr_throttle
 kp_throttle = (2 * zeta * wn_throttle - a_V1)/a_V2
 kd_throttle = 0
@@ -175,3 +176,4 @@ ki_throttle = wn_throttle**2 / a_V2
 kp = np.array([kp_roll, kp_course, kp_pitch, kp_altitude, kp_airspeed, kp_throttle])
 kd = np.array([kd_roll, kd_course, kd_pitch, kd_altitude, kd_airspeed, kd_throttle])
 ki = np.array([ki_roll, ki_course, ki_pitch, ki_altitude, ki_airspeed, ki_throttle])
+

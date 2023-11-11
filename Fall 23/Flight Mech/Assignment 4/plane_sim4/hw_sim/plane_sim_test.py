@@ -1,5 +1,5 @@
 import sys
-sys.path.append('C:/Users/spenc/Documents/School/Fall 23/Flight Mech/Assignment 4/plane_sim4')# one directory up
+sys.path.append('C:/Users/spenc/Documents/School/Fall 23/Flight Mech/Assignment 5/plane_sim5')# one directory up
 import numpy as np
 from math import cos, sin, tan
 import scipy.linalg as linalg

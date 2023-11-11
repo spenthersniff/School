@@ -180,6 +180,9 @@ class Autopilot():
 
     def airspeed_hold_pitch(self, Va_c,Va,flag,dt):
        
+        limit1=np.radians(45)
+        limit2=-np.radians(45)
+
         kp=gains.kp_airspeed
         kd=gains.kd_airspeed
         ki=gains.ki_airspeed
@@ -197,7 +200,11 @@ class Autopilot():
         
         u=kp*error+ki*self.ahp_integrator+kd*self.ahp_differentiator
         
-        return u
+        u_sat = self.sat(u, limit1, limit2)
+        if ki != 0:
+            self.ahp_integrator = self.ahp_integrator + dt/ki*(u_sat - u)
+       
+        return u_sat
     
     def airspeed_hold_throttle(self, Va_c,Va,flag,dt):
         
@@ -229,6 +236,9 @@ class Autopilot():
     
     def altitude_hold(self, h_c,h,flag,dt):
        
+        limit1=np.radians(45)
+        limit2=-np.radians(45)
+
         kp=gains.kp_altitude
         kd=gains.kd_altitude
         ki=gains.ki_altitude
@@ -246,7 +256,11 @@ class Autopilot():
         
         u=kp*error+ki*self.altitude_integrator+kd*self.altitude_differentiator
         
-        return u
+        u_sat = self.sat(u, limit1, limit2)
+        if ki != 0:
+            self.altitude_integrator = self.altitude_integrator + dt/ki*(u_sat - u)
+
+        return u_sat
 
     def sat(self,inn, up_limit, low_limit):
         if inn > up_limit:
@@ -256,3 +270,5 @@ class Autopilot():
         else:
             out = inn
         return out
+    
+

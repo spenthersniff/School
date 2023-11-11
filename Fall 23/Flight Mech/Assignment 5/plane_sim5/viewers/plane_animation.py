@@ -15,7 +15,7 @@ from tools.rotations import Quaternion2Euler, Quaternion2Rotation, Euler2Rotatio
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
 class plane_animation():
-    def __init__(self, state0, scale=0.25):
+    def __init__(self, scale=0.25):
 
         
         self.scale=scale
