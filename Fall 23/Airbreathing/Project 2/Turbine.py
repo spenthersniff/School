@@ -25,8 +25,8 @@ mdot_f = f*mdot_a         # fuel mass flow, kg/s
 mdot = mdot_a+mdot_f      # total mass flow, kg/s
 
 def gas_angles(phi, psi, dor):
-    b2 = atan((1/2*phi)*((psi/2)-2*dor))
-    b3 = atan((1/2*phi)*((psi/2)+2*dor))
+    b2 = atan((1/(2*phi))*((psi/2)-2*dor))
+    b3 = atan((1/(2*phi))*((psi/2)+2*dor))
     a2 = atan(tan(b2)+(1/phi))
     a3 = atan(tan(b3)-(1/phi))
     return b2, b3, a2, a3
@@ -111,7 +111,7 @@ phi1_m = 0.78              # flow coefficient, >=0.78
 psi1_m = 3.3               # blade loading (temp drop) coefficient, <=3.3
 dor1_m = 0.5               # degree of reaction
 b2_s1, b3_s1, a2_s1, a3_s1, U_s1, r_m1_s1, Cw1_s1, C1_s1, T013_s1, w1_s1, Ca2_s1, Cw2_s1, C2_s1, V2_s1, Ca3_s1, Cw3_s1, C3_s1, V3_s1, T03_s1, T_rat_s1, P_rat_s1, P03_s1 = meanline(T01, P01, Ca1, phi1_m, psi1_m, dor1_m, omega)
-print(np.degrees(b3_s1))
+print(np.degrees(a3_s1))
 
 # mean stage 2 calculations
 phi2_m = 0.78              # flow coefficient, >=0.78
@@ -148,8 +148,7 @@ def root_tip(Ca1, Cw2, r_m, omega, gamma, b3, T01, P01, cp, R, mdot):
     C2r = Ca1/cos(a2r)
     V2r = Ca1/cos(b2r)
     phi_r = Ca1/U_r
-    print(U_r)
-    psi_r = 2*Ca1(tan(b2r)+tan(b3))/U_r
+    psi_r = 2*Ca1*(tan(b2r)+tan(b3))/U_r
     dor_r = Ca1*(tan(b3)-tan(b2r))/(2*U_r)
 
 
@@ -159,7 +158,7 @@ def root_tip(Ca1, Cw2, r_m, omega, gamma, b3, T01, P01, cp, R, mdot):
     C2t = Ca1/cos(a2t)
     V2t = Ca1/cos(b2t)
     phi_t = Ca1/U_t
-    psi_t = 2*Ca1(tan(b2t)+tan(b3))/U_t
+    psi_t = 2*Ca1*(tan(b2t)+tan(b3))/U_t
     dor_t = Ca1*(tan(b3)-tan(b2t))/(2*U_t)
 
     return Cw2t, C2r, V2r, phi_r, psi_r, dor_r, Cw2t, C2t, V2t, phi_t, psi_t, dor_t, r_r, r_t
