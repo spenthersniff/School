@@ -15,7 +15,7 @@ mdot_core_a = 40          # core mass flow of air, kg/s
 n_stages = 3.0            # number of turbine stages
 cp = 1148.0               # for hot gas, J/(kg*K)
 gamma = 1.333             # specific heat ratio
-Ca1 = 300.0               # axial inlet speed, m/s
+Ca1 = 310.0               # axial inlet speed, m/s
 n_m = 0.99                # mechanical efficiency
 n = 240.0433              # rotational speed, rev/s
 omega = 2*np.pi*n         # rotational speed, rad/s
@@ -116,29 +116,45 @@ def final_stage_mean(T01, P01, Ca1, omega, a1, rm, w):
     return b2, b3, a2, a3, U, Cw1, C1, T013, Ca2, Cw2, C2, V2, Ca3, Cw3, C3, V3, T03, T_rat, P_rat, P03, phi, psi, dor
 
 # mean stage 1 calculations
-phi1_m = 0.84           # flow coefficient, >=0.78
-psi1_m = 2.7              # blade loading (temp drop) coefficient, <=3.3
+phi1_m = 0.829           # flow coefficient, >=0.78
+psi1_m = 2.806              # blade loading (temp drop) coefficient, <=3.3
 dor1_m = 0.5               # degree of reaction
 b2_s1, b3_s1, a2_s1, a3_s1, U_s1, r_m1_s1, Cw1_s1, C1_s1, T013_s1, w1_s1, Ca2_s1, Cw2_s1, C2_s1, V2_s1, Ca3_s1, Cw3_s1, C3_s1, V3_s1, T03_s1, T_rat_s1, P_rat_s1, P03_s1 = meanline(T01, P01, Ca1, phi1_m, psi1_m, dor1_m, omega, a1_inlet)
 print('stage 1 mean','\nb2_s1:',np.degrees(b2_s1), '\nb3_s1', np.degrees(b3_s1), '\na2_s1', np.degrees(a2_s1), '\na3_s1', np.degrees(a3_s1), '\nU_s1',U_s1, '\nCw1_s1', Cw1_s1, '\nC1_s1', C1_s1, '\nT013_s1', T013_s1, '\nCa2_s1', Ca2_s1, '\nCw2_s1', Cw2_s1, '\nC2_s1', C2_s1, '\nV2_s1', V2_s1, '\nCa3_s1', Ca3_s1, '\nCw3_s1', Cw3_s1, '\nC3_s1', C3_s1, '\nV3_s1', V3_s1, '\nT03_s1', T03_s1, '\nT_rat_s1', T_rat_s1, '\nP_rat_s1', P_rat_s1, '\nP03_s1', P03_s1,'\n')
 
 
 # mean stage 2 calculations
-phi2_m = .838             # flow coefficient, >=0.78, 
-psi2_m = 2.5               # blade loading (temp drop) coefficient, <=3.3
+phi2_m = .847             # flow coefficient, >=0.78, 
+psi2_m = 2.630               # blade loading (temp drop) coefficient, <=3.3
 dor2_m = 0.5               # degree of reaction
 b2_s2, b3_s2, a2_s2, a3_s2, U_s2, r_m2_s2, Cw1_s2, C1_s2, T013_s2, w2_s2, Ca2_s2, Cw2_s2, C2_s2, V2_s2, Ca3_s2, Cw3_s2, C3_s2, V3_s2, T03_s2, T_rat_s2, P_rat_s2, P03_s2 = meanline(T03_s1, P03_s1, Ca1, phi2_m, psi2_m, dor2_m, omega, a3_s1)
 print('stage 2 mean','\nb2_s2:',np.degrees(b2_s2), '\nb3_s2', np.degrees(b3_s2), '\na2_s2', np.degrees(a2_s2), '\na3_s2', np.degrees(a3_s2), '\nU_s2',U_s2, '\nCw1_s2', Cw1_s2, '\nC1_s2', C1_s2, '\nT013_s2', T013_s2, '\nCa2_s2', Ca2_s2, '\nCw2_s2', Cw2_s2, '\nC2_s2', C2_s2, '\nV2_s2', V2_s2, '\nCa3_s2', Ca3_s2, '\nCw3_s2', Cw3_s2, '\nC3_s2', C3_s2, '\nV3_s2', V3_s2, '\nT03_s2', T03_s2, '\nT_rat_s2', T_rat_s2, '\nP_rat_s2', P_rat_s2, '\nP03_s2', P03_s2,'\n')
 
-# mean stage 3 calculations
+# mean stage 3
+phi3_m = .872             # flow coefficient, >=0.78, 
+psi3_m = 1.956               # blade loading (temp drop) coefficient, <=3.3
+dor3_m = 0.5               # degree of reaction
+b2_s3, b3_s3, a2_s3, a3_s3, U_s3, r_m2_s3, Cw1_s3, C1_s3, T013_s3, w2_s3, Ca2_s3, Cw2_s3, C2_s3, V2_s3, Ca3_s3, Cw3_s3, C3_s3, V3_s3, T03_s3, T_rat_s3, P_rat_s3, P03_s3 = meanline(T03_s2, P03_s2, Ca1, phi3_m, psi3_m, dor3_m, omega, a3_s2)
+print('stage 3 mean','\nb2_s3:',np.degrees(b2_s3), '\nb3_s3', np.degrees(b3_s3), '\na2_s3', np.degrees(a2_s3), '\na3_s3', np.degrees(a3_s3), '\nU_s3',U_s3, '\nCw1_s3', Cw1_s3, '\nC1_s3', C1_s3, '\nT013_s3', T013_s3, '\nCa2_s3', Ca2_s3, '\nCw2_s3', Cw2_s3, '\nC2_s3', C2_s3, '\nV2_s3', V2_s3, '\nCa3_s3', Ca3_s3, '\nCw3_s3', Cw3_s3, '\nC3_s3', C3_s3, '\nV3_s3', V3_s3, '\nT03_s3', T03_s3, '\nT_rat_s3', T_rat_s3, '\nP_rat_s3', P_rat_s3, '\nP03_s3', P03_s3,'\n')
+
+# mean stage 4 calculations
     # find percent step of radius from stage 1 to 2, apply same step to estimate m3
+# r12_step = r_m2_s2/r_m1_s1
+# # r_m3 = r_m2_s2*r12_step
+# r_m3 = 1.03*r_m2_s2
+#     # leftover work required to power compressor
+# w3 = w_turb - w2_s2 - w1_s1
+# b2_s3, b3_s3, a2_s3, a3_s3, U_s3, Cw1_s3, C1_s3, T013_s3, Ca2_s3, Cw2_s3, C2_s3, V2_s3, Ca3_s3, Cw3_s3, C3_s3, V3_s3, T03_s3, T_rat_s3, P_rat_s3, P03_s3, phi_s3, psi_s3, dor_s3 = final_stage_mean(T03_s2, P03_s2, Ca1, omega, a3_s2, r_m3, w3)
+# print('final stage mean','\nb2_s3:',np.degrees(b2_s3), '\nb3_s3', np.degrees(b3_s3), '\na2_s3', np.degrees(a2_s3), '\na3_s3', np.degrees(a3_s3), '\nU_s3',U_s3, '\nCw1_s3', Cw1_s3, '\nC1_s3', C1_s3, '\nT013_s3', T013_s3, '\nCa2_s3', Ca2_s3, '\nCw2_s3', Cw2_s3, '\nC2_s3', C2_s3, '\nV2_s3', V2_s3, '\nCa3_s3', Ca3_s3, '\nCw3_s3', Cw3_s3, '\nC3_s3', C3_s3, '\nV3_s3', V3_s3, '\nT03_s3', T03_s3, '\nT_rat_s3', T_rat_s3, '\nP_rat_s3', P_rat_s3, '\nP03_s3', P03_s3, '\nphi_s3', phi_s3, '\npsi_s3', psi_s3, '\ndor_s3', dor_s3,'\n')
+
 r12_step = r_m2_s2/r_m1_s1
 # r_m3 = r_m2_s2*r12_step
-r_m3 = 0.99*r_m2_s2
+r_m4 = .97*r_m2_s3
     # leftover work required to power compressor
-w3 = w_turb - w2_s2 - w1_s1
-b2_s3, b3_s3, a2_s3, a3_s3, U_s3, Cw1_s3, C1_s3, T013_s3, Ca2_s3, Cw2_s3, C2_s3, V2_s3, Ca3_s3, Cw3_s3, C3_s3, V3_s3, T03_s3, T_rat_s3, P_rat_s3, P03_s3, phi_s3, psi_s3, dor_s3 = final_stage_mean(T03_s2, P03_s2, Ca1, omega, a3_s2, r_m3, w3)
-print('final stage mean','\nb2_s3:',np.degrees(b2_s3), '\nb3_s3', np.degrees(b3_s3), '\na2_s3', np.degrees(a2_s3), '\na3_s3', np.degrees(a3_s3), '\nU_s3',U_s3, '\nCw1_s3', Cw1_s3, '\nC1_s3', C1_s3, '\nT013_s3', T013_s3, '\nCa2_s3', Ca2_s3, '\nCw2_s3', Cw2_s3, '\nC2_s3', C2_s3, '\nV2_s3', V2_s3, '\nCa3_s3', Ca3_s3, '\nCw3_s3', Cw3_s3, '\nC3_s3', C3_s3, '\nV3_s3', V3_s3, '\nT03_s3', T03_s3, '\nT_rat_s3', T_rat_s3, '\nP_rat_s3', P_rat_s3, '\nP03_s3', P03_s3, '\nphi_s3', phi_s3, '\npsi_s3', psi_s3, '\ndor_s3', dor_s3,'\n')
+w4 = w_turb - w2_s2 - w1_s1 - w2_s3
+b2_s4, b3_s4, a2_s4, a3_s4, U_s4, Cw1_s4, C1_s4, T013_s4, Ca2_s4, Cw2_s4, C2_s4, V2_s4, Ca3_s4, Cw3_s4, C3_s4, V3_s4, T03_s4, T_rat_s4, P_rat_s4, P03_s4, phi_s4, psi_s4, dor_s4 = final_stage_mean(T03_s3, P03_s3, Ca1, omega, a3_s3, r_m4, w4)
+print('final stage mean','\nb2_s4:',np.degrees(b2_s4), '\nb3_s4', np.degrees(b3_s4), '\na2_s4', np.degrees(a2_s4), '\na3_s4', np.degrees(a3_s4), '\nU_s4',U_s4, '\nCw1_s4', Cw1_s4, '\nC1_s4', C1_s4, '\nT013_s4', T013_s4, '\nCa2_s4', Ca2_s4, '\nCw2_s4', Cw2_s4, '\nC2_s4', C2_s4, '\nV2_s4', V2_s4, '\nCa3_s4', Ca3_s4, '\nCw3_s4', Cw3_s4, '\nC3_s4', C3_s4, '\nV3_s4', V3_s4, '\nT03_s4', T03_s4, '\nT_rat_s4', T_rat_s4, '\nP_rat_s4', P_rat_s4, '\nP03_s4', P03_s4, '\nphi_s4', phi_s4, '\npsi_s4', psi_s4, '\ndor_s4', dor_s4,'\n')
+
 
 def root_tip(Ca1, Cw2, r_m, omega, gamma, b3, T01, P01, cp, R, mdot):
     C1 = Ca1
@@ -182,32 +198,38 @@ Cw2r_s1, C2r_s1, V2r_s1, phi_r_s1, psi_r_s1, dor_r_s1, Cw2t_s1, C2t_s1, V2t_s1, 
 print('stage 1 root tip','\nCw2r_s1:', Cw2r_s1, '\nC2r_s1:',C2r_s1,'\nV2r_s1:', V2r_s1, '\nphi_r_s1:', phi_r_s1, '\npsi_r_s1:', psi_r_s1, '\ndor_r_s1:', dor_r_s1, '\nCw2t_s1:', Cw2t_s1, '\nC2t_s1:',C2t_s1, '\nV2t_s1:', V2t_s1, '\nphi_t_s1:', phi_t_s1, '\npsi_t_s1:', psi_t_s1, '\ndor_t_s1:', dor_t_s1, '\nr_r_s1:', r_r_s1, '\nr_t_s1:', r_t_s1, '\na2r_s1:', np.degrees(a2r_s1), '\nb2r_s1:', np.degrees(b2r_s1), '\na2t_s1:', np.degrees(a2t_s1), '\nb2t_s1:', np.degrees(b2t_s1),'\n')
 
 # stage 2 root tip 
-Cw2r_s2, C2r_s2, V2r_s2, phi_r_s2, psi_r_s2, dor_r_s2, Cw2t_s2, C2t_s2, V2t_s2, phi_t_s2, psi_t_s2, dor_t_s2, r_r_s2, r_t_s2, a2r_s2, b2r_s2, a2t_s2, b2t_s2, h_s2 = root_tip(Ca1, Cw2_s2, r_m2_s2, omega, gamma, b3_s2, T01, P01, cp, R, mdot_core)
+Cw2r_s2, C2r_s2, V2r_s2, phi_r_s2, psi_r_s2, dor_r_s2, Cw2t_s2, C2t_s2, V2t_s2, phi_t_s2, psi_t_s2, dor_t_s2, r_r_s2, r_t_s2, a2r_s2, b2r_s2, a2t_s2, b2t_s2, h_s2 = root_tip(Ca1, Cw2_s2, r_m2_s2, omega, gamma, b3_s2, T03_s1, P03_s1, cp, R, mdot_core)
 print('stage 2 root tip','\nCw2r_s2:', Cw2r_s2, '\nC2r_s2:',C2r_s2,'\nV2r_s2:', V2r_s2, '\nphi_r_s2:', phi_r_s2, '\npsi_r_s2:', psi_r_s2, '\ndor_r_s2:', dor_r_s2, '\nCw2t_s2:', Cw2t_s2, '\nC2t_s2:',C2t_s2, '\nV2t_s2:', V2t_s2, '\nphi_t_s2:', phi_t_s2, '\npsi_t_s2:', psi_t_s2, '\ndor_t_s2:', dor_t_s2, '\nr_r_s2:', r_r_s2, '\nr_t_s2:', r_t_s2, '\na2r_s2:', np.degrees(a2r_s2), '\nb2r_s2:', np.degrees(b2r_s2), '\na2t_s2:', np.degrees(a2t_s2), '\nb2t_s2:', np.degrees(b2t_s2),'\n')
 
-# need stage 3 root tip
-Cw2r_s3, C2r_s3, V2r_s3, phi_r_s3, psi_r_s3, dor_r_s3, Cw2t_s3, C2t_s3, V2t_s3, phi_t_s3, psi_t_s3, dor_t_s3, r_r_s3, r_t_s3, a2r_s3, b2r_s3, a2t_s3, b2t_s3, h_s3 = root_tip(Ca1, Cw2_s2, r_m3, omega, gamma, b3_s3, T01, P01, cp, R, mdot_core)
+# stage 3 root tip
+Cw2r_s3, C2r_s3, V2r_s3, phi_r_s3, psi_r_s3, dor_r_s3, Cw2t_s3, C2t_s3, V2t_s3, phi_t_s3, psi_t_s3, dor_t_s3, r_r_s3, r_t_s3, a2r_s3, b2r_s3, a2t_s3, b2t_s3, h_s3 = root_tip(Ca1, Cw2_s2, r_m2_s3, omega, gamma, b3_s3, T03_s2, P03_s2, cp, R, mdot_core)
 print('stage 3 root tip','\nCw2r_s3:', Cw2r_s3, '\nC2r_s3:',C2r_s3,'\nV2r_s3:', V2r_s3, '\nphi_r_s3:', phi_r_s3, '\npsi_r_s3:', psi_r_s3, '\ndor_r_s3:', dor_r_s3, '\nCw2t_s3:', Cw2t_s3, '\nC2t_s3:',C2t_s3, '\nV2t_s3:', V2t_s3, '\nphi_t_s3:', phi_t_s3, '\npsi_t_s3:', psi_t_s3, '\ndor_t_s3:', dor_t_s3, '\nr_r_s3:', r_r_s3, '\nr_t_s3:', r_t_s3, '\na2r_s3:', np.degrees(a2r_s3), '\nb2r_s3:', np.degrees(b2r_s3), '\na2t_s3:', np.degrees(a2t_s3), '\nb2t_s3:', np.degrees(b2t_s3),'\n')
 
-print('Stage 1 work = ', w1_s1, '\n','Stage 2 work = ', w2_s2, '\n','Stage 3 work = ', w3, '\n')
-print('Stage 1 mean radius = ', r_m1_s1, '\n','Stage 2 mean radius = ', r_m2_s2, '\n','Stage 3 mean radius = ', r_m3, '\n')
-print('Stage 1 height = ', h_s1, '\n','Stage 2 height = ', h_s2, '\n','Stage 3 height = ', h_s3, '\n')
-print('Stage 1 phi r = ', phi_r_s1, '\n','Stage 2 phi r = ', phi_r_s2, '\n','Stage 3 phi r = ', phi_r_s3, '\n')
-print('Stage 1 phi t = ', phi_t_s1, '\n','Stage 2 phi t = ', phi_t_s2, '\n','Stage 3 phi t = ', phi_t_s3, '\n')
-print('Stage 1 psi r = ', psi_r_s1, '\n','Stage 2 psi r = ', psi_r_s2, '\n','Stage 3 psi r = ', psi_r_s3, '\n')
-print('Stage 1 psi t = ', psi_t_s1, '\n','Stage 2 psi t = ', psi_t_s2, '\n','Stage 3 psi t = ', psi_t_s3, '\n')
-print('Stage 1 dor r = ', dor_r_s1, '\n','Stage 2 dor r = ', dor_r_s2, '\n','Stage 3 dor r = ', dor_r_s3, '\n')
-print('Stage 1 dor t = ', dor_t_s1, '\n','Stage 2 dor t = ', dor_t_s2, '\n','Stage 3 dor t = ', dor_t_s3, '\n')
+# stage  root tip
+Cw2r_s4, C2r_s4, V2r_s4, phi_r_s4, psi_r_s4, dor_r_s4, Cw2t_s4, C2t_s4, V2t_s4, phi_t_s4, psi_t_s4, dor_t_s4, r_r_s4, r_t_s4, a2r_s4, b2r_s4, a2t_s4, b2t_s4, h_s4 = root_tip(Ca1, Cw2_s3, r_m4, omega, gamma, b3_s4, T03_s3, P03_s3, cp, R, mdot_core)
+print('stage 3 root tip','\nCw2r_s4:', Cw2r_s4, '\nC2r_s4:',C2r_s4,'\nV2r_s4:', V2r_s4, '\nphi_r_s4:', phi_r_s4, '\npsi_r_s4:', psi_r_s4, '\ndor_r_s4:', dor_r_s4, '\nCw2t_s4:', Cw2t_s4, '\nC2t_s4:',C2t_s4, '\nV2t_s4:', V2t_s4, '\nphi_t_s4:', phi_t_s4, '\npsi_t_s4:', psi_t_s4, '\ndor_t_s4:', dor_t_s4, '\nr_r_s4:', r_r_s4, '\nr_t_s4:', r_t_s4, '\na2r_s4:', np.degrees(a2r_s4), '\nb2r_s4:', np.degrees(b2r_s4), '\na2t_s4:', np.degrees(a2t_s4), '\nb2t_s4:', np.degrees(b2t_s4),'\n')
+
+
+print('Stage 1 work = ', w1_s1, '\n','Stage 2 work = ', w2_s2, '\n','Stage 3 work = ', w2_s3, '\n','Stage 4 work = ', w4, '\n')
+print('Stage 1 mean radius = ', r_m1_s1, '\n','Stage 2 mean radius = ', r_m2_s2, '\n','Stage 3 mean radius = ', r_m2_s3, '\n','Stage 4 mean radius = ', r_m4, '\n')
+print('Stage 1 height = ', h_s1, '\n','Stage 2 height = ', h_s2, '\n','Stage 3 height = ', h_s3, '\n','Stage 4 height = ', h_s4, '\n')
+print('Stage 1 phi r = ', phi_r_s1, '\n','Stage 2 phi r = ', phi_r_s2, '\n','Stage 3 phi r = ', phi_r_s3, '\n','Stage 4 phi r = ', phi_r_s4, '\n')
+print('Stage 1 phi t = ', phi_t_s1, '\n','Stage 2 phi t = ', phi_t_s2, '\n','Stage 3 phi t = ', phi_t_s3, '\n','Stage 4 phi t = ', phi_t_s4, '\n')
+print('Stage 1 psi r = ', psi_r_s1, '\n','Stage 2 psi r = ', psi_r_s2, '\n','Stage 3 psi r = ', psi_r_s3, '\n','Stage 4 psi r = ', psi_r_s4, '\n')
+print('Stage 1 psi t = ', psi_t_s1, '\n','Stage 2 psi t = ', psi_t_s2, '\n','Stage 3 psi t = ', psi_t_s3, '\n','Stage 4 psi t = ', psi_t_s4, '\n')
+print('Stage 1 dor r = ', dor_r_s1, '\n','Stage 2 dor r = ', dor_r_s2, '\n','Stage 3 dor r = ', dor_r_s3, '\n','Stage 4 dor r = ', dor_r_s4, '\n')
+print('Stage 1 dor t = ', dor_t_s1, '\n','Stage 2 dor t = ', dor_t_s2, '\n','Stage 3 dor t = ', dor_t_s3, '\n','Stage 4 dor t = ', dor_t_s4, '\n')
 
 # design lims check
-phis = [phi_r_s1, phi_t_s1, phi_r_s2, phi_t_s2, phi_r_s3, phi_t_s3, phi_s3]
-phiss = ["s1phir", "s1phit", "s2phir", "s2phit", "s3phir", "s3phit", "s3phi"]
-psis = [psi_r_s1, psi_t_s1, psi_r_s2, psi_t_s2, psi_r_s3, psi_t_s3, psi_s3]
-psiss = ["s1psir", "s1psit", "s2psir", "s2psit", "s3psir", "s3psit", "s3psi"]
-print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-print("Design Params Check")
-for k in range(len(phis)):
-    if phis[k] < 0.78:
-        print(f"{phiss[k]} = {phis[k]:.3f} (<0.78)")
-    if psis[k] > 3.3:
-        print(f"{psiss[k]} = {psis[k]:.2f} (>3.3)")
+# phis = [phi_r_s1, phi_t_s1, phi_r_s2, phi_t_s2, phi_r_s3, phi_t_s3, phi_r_s4, phi_t_s4, phi_s4]
+# phiss = ["s1phir", "s1phit", "s2phir", "s2phit", "s3phir", "s3phit", "s4phir", "s4phit", "s4phi"]
+# psis = [psi_r_s1, psi_t_s1, psi_r_s2, psi_t_s2, psi_r_s3, psi_t_s3, psi_r_s4, psi_t_s4, psi_s4]
+# psiss = ["s1psir", "s1psit", "s2psir", "s2psit", "s3psir", "s3psit", "s4psir", "s4psit", "s4psi"]
+# print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+# print("Design Params Check")
+# for k in range(len(phis)):
+#     if phis[k] < 0.78:
+#         print(f"{phiss[k]} = {phis[k]:.3f} (<0.78)")
+#     if psis[k] > 3.3:
+#         print(f"{psiss[k]} = {psis[k]:.2f} (>3.3)")
+# print(w_turb)
