@@ -8,8 +8,10 @@ T01 = 2275.0              # turbine inlet temp, K
 T03 = 755.329018          # compressor exit temp, K
 P01 = 19.22525            # turbine inlet pressure, bar
 n_inf = 0.92              # polytropic turbine efficiency
+n_m = 0.99                # mechanical efficiency
 w_comp = 437774.06        # compressor work required, J/kg
-mdot_a = 280.0            # mass flow of air, kg/s
+w_turb = w_comp/n_m       # turbine work required to power compressor, J/kg
+mdot_a = 40               # core mass flow of air, kg/s
 n_stages = 3.0            # number of turbine stages
 cp = 1148.0               # for hot gas, J/(kg*K)
 gamma = 1.333             # specific heat ratio
@@ -111,21 +113,24 @@ phi1_m = 0.78              # flow coefficient, >=0.78
 psi1_m = 3.3               # blade loading (temp drop) coefficient, <=3.3
 dor1_m = 0.5               # degree of reaction
 b2_s1, b3_s1, a2_s1, a3_s1, U_s1, r_m1_s1, Cw1_s1, C1_s1, T013_s1, w1_s1, Ca2_s1, Cw2_s1, C2_s1, V2_s1, Ca3_s1, Cw3_s1, C3_s1, V3_s1, T03_s1, T_rat_s1, P_rat_s1, P03_s1 = meanline(T01, P01, Ca1, phi1_m, psi1_m, dor1_m, omega)
-print(np.degrees(a3_s1))
+print('stage 1 mean','\n','\nb2_s1:',np.degrees(b2_s1), '\nb3_s1', np.degrees(b3_s1), '\na2_s1', np.degrees(a2_s1), '\na3_s1', np.degrees(a3_s1), '\nU_s1',U_s1, '\nCw1_s1', Cw1_s1, '\nC1_s1', C1_s1, '\nT013_s1', T013_s1, '\nCa2_s1', Ca2_s1, '\nCw2_s1', Cw2_s1, '\nC2_s1', C2_s1, '\nV2_s1', V2_s1, '\nCa3_s1', Ca3_s1, '\nCw3_s1', Cw3_s1, '\nC3_s1', C3_s1, '\nV3_s1', V3_s1, '\nT03_s1', T03_s1, '\nT_rat_s1', T_rat_s1, '\nP_rat_s1', P_rat_s1, '\nP03_s1', P03_s1)
+
 
 # mean stage 2 calculations
 phi2_m = 0.78              # flow coefficient, >=0.78
 psi2_m = 3.3               # blade loading (temp drop) coefficient, <=3.3
 dor2_m = 0.5               # degree of reaction
 b2_s2, b3_s2, a2_s2, a3_s2, U_s2, r_m2_s2, Cw1_s2, C1_s2, T013_s2, w2_s2, Ca2_s2, Cw2_s2, C2_s2, V2_s2, Ca3_s2, Cw3_s2, C3_s2, V3_s2, T03_s2, T_rat_s2, P_rat_s2, P03_s2 = meanline(T01, P01, Ca1, phi2_m, psi2_m, dor2_m, omega)
+print('stage 2 mean','\n','\nb2_s2:',np.degrees(b2_s2), '\nb3_s2', np.degrees(b3_s2), '\na2_s2', np.degrees(a2_s2), '\na3_s2', np.degrees(a3_s2), '\nU_s2',U_s2, '\nCw1_s2', Cw1_s2, '\nC1_s2', C1_s2, '\nT013_s2', T013_s2, '\nCa2_s2', Ca2_s2, '\nCw2_s2', Cw2_s2, '\nC2_s2', C2_s2, '\nV2_s2', V2_s2, '\nCa3_s2', Ca3_s2, '\nCw3_s2', Cw3_s2, '\nC3_s2', C3_s2, '\nV3_s2', V3_s2, '\nT03_s2', T03_s2, '\nT_rat_s2', T_rat_s2, '\nP_rat_s2', P_rat_s2, '\nP03_s2', P03_s2)
 
 # mean stage 3 calculations
     # find percent step of radius from stage 1 to 2, apply same step to estimate m3
 r12_step = r_m2_s2/r_m1_s1
 r_m3 = r_m2_s2*r12_step
     # leftover work required to power compressor
-w3 = w_comp - w2_s2 - w1_s1
+w3 = w_turb - w2_s2 - w1_s1
 b2_s3, b3_s3, a2_s3, a3_s3, U_s3, Cw1_s3, C1_s3, T013_s3, Ca2_s3, Cw2_s3, C2_s3, V2_s3, Ca3_s3, Cw3_s3, C3_s3, V3_s3, T03_s3, T_rat_s3, P_rat_s3, P03_s3, phi_s3, psi_s3, dor_s3 = final_stage_mean(T01, P01, Ca1, omega, a1, r_m3, w3)
+print('final stage mean','\n','\nb2_s3:',b2_s3, '\nb3_s3', b3_s3, '\na2_s3', a2_s3, '\na3_s3', a3_s3, '\nU_s3',U_s3, '\nCw1_s3', Cw1_s3, '\nC1_s3', C1_s3, '\nT013_s3', T013_s3, '\nCa2_s3', Ca2_s3, '\nCw2_s3', Cw2_s3, '\nC2_s3', C2_s3, '\nV2_s3', V2_s3, '\nCa3_s3', Ca3_s3, '\nCw3_s3', Cw3_s3, '\nC3_s3', C3_s3, '\nV3_s3', V3_s3, '\nT03_s3', T03_s3, '\nT_rat_s3', T_rat_s3, '\nP_rat_s3', P_rat_s3, '\nP03_s3', P03_s3, '\nphi_s3', phi_s3, '\npsi_s3', psi_s3, '\ndor_s3', dor_s3)
 
 def root_tip(Ca1, Cw2, r_m, omega, gamma, b3, T01, P01, cp, R, mdot):
     C1 = Ca1
@@ -161,11 +166,13 @@ def root_tip(Ca1, Cw2, r_m, omega, gamma, b3, T01, P01, cp, R, mdot):
     psi_t = 2*Ca1*(tan(b2t)+tan(b3))/U_t
     dor_t = Ca1*(tan(b3)-tan(b2t))/(2*U_t)
 
-    return Cw2t, C2r, V2r, phi_r, psi_r, dor_r, Cw2t, C2t, V2t, phi_t, psi_t, dor_t, r_r, r_t
+    return Cw2t, C2r, V2r, phi_r, psi_r, dor_r, Cw2t, C2t, V2t, phi_t, psi_t, dor_t, r_r, r_t, a2r, b2r, a2t, b2t
 
 
 # stage 1 root tip
-Cw2t_s1, C2r_s1, V2r_s1, phi_r_s1, psi_r_s1, dor_r_s1, Cw2t_s1, C2t_s1, V2t_s1, phi_t_s1, psi_t_s1, dor_t_s1, r_r_s1, r_t_s1 = root_tip(Ca1, Cw2_s1, r_m1_s1, omega, gamma, b3_s1, T01, P01, cp, R, mdot)
+Cw2r_s1, C2r_s1, V2r_s1, phi_r_s1, psi_r_s1, dor_r_s1, Cw2t_s1, C2t_s1, V2t_s1, phi_t_s1, psi_t_s1, dor_t_s1, r_r_s1, r_t_s1, a2r_s1, b2r_s1, a2t_s1, b2t_s1 = root_tip(Ca1, Cw2_s1, r_m1_s1, omega, gamma, b3_s1, T01, P01, cp, R, mdot)
+print('stage 1 root tip','\n','\nCw2r_s1:', Cw2r_s1, '\nC2r_s1:',C2r_s1,'\nV2r_s1:', V2r_s1, '\nphi_r_s1:', phi_r_s1, '\npsi_r_s1:', psi_r_s1, '\ndor_r_s1:', dor_r_s1, '\nCw2t_s1:', Cw2t_s1, '\nC2t_s1:',C2t_s1, '\nV2t_s1:', V2t_s1, '\nphi_t_s1:', phi_t_s1, '\npsi_t_s1:', psi_t_s1, '\ndor_t_s1:', dor_t_s1, '\nr_r_s1:', r_r_s1, '\nr_t_s1:', r_t_s1, '\na2r_s1:', np.degrees(a2r_s1), '\nb2r_s1:', np.degrees(b2r_s1), '\na2t_s1:', np.degrees(a2t_s1), '\nb2t_s1:', np.degrees(b2t_s1))
 
 # stage 2 root tip 
-Cw2t_s2, C2r_s2, V2r_s2, phi_r_s2, psi_r_s2, dor_r_s2, Cw2t_s2, C2t_s2, V2t_s2, phi_t_s2, psi_t_s2, dor_t_s2, r_r_s2, r_t_s2 = root_tip(Ca1, Cw2_s2, r_m2_s2, omega, gamma, b3_s2, T01, P01, cp, R, mdot)
+Cw2r_s2, C2r_s2, V2r_s2, phi_r_s2, psi_r_s2, dor_r_s2, Cw2t_s2, C2t_s2, V2t_s2, phi_t_s2, psi_t_s2, dor_t_s2, r_r_s2, r_t_s2, a2r_s2, b2r_s2, a2t_s2, b2t_s2 = root_tip(Ca1, Cw2_s2, r_m2_s2, omega, gamma, b3_s2, T01, P01, cp, R, mdot)
+print('stage 2 root tip','\n','\nCw2r_s2:', Cw2r_s2, '\nC2r_s2:',C2r_s2,'\nV2r_s2:', V2r_s2, '\nphi_r_s2:', phi_r_s2, '\npsi_r_s2:', psi_r_s2, '\ndor_r_s2:', dor_r_s2, '\nCw2t_s2:', Cw2t_s2, '\nC2t_s2:',C2t_s2, '\nV2t_s2:', V2t_s2, '\nphi_t_s2:', phi_t_s2, '\npsi_t_s2:', psi_t_s2, '\ndor_t_s2:', dor_t_s2, '\nr_r_s2:', r_r_s2, '\nr_t_s2:', r_t_s2, '\na2r_s2:', np.degrees(a2r_s2), '\nb2r_s2:', np.degrees(b2r_s2), '\na2t_s2:', np.degrees(a2t_s2), '\nb2t_s2:', np.degrees(b2t_s2))
