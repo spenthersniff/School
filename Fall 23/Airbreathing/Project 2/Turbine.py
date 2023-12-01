@@ -10,8 +10,8 @@ P01 = 19.22525            # turbine inlet pressure, bar
 n_inf = 0.92              # polytropic turbine efficiency
 n_m = 0.99                # mechanical efficiency
 w_comp = 437774.06        # compressor work required, J/kg
-w_turb = w_comp/n_m       # turbine work required to power compressor, J/kg
-mdot_a = 40               # core mass flow of air, kg/s
+mdot_a = 280              # total mass flow of air, kg/s
+mdot_core_a = 40          # core mass flow of air, kg/s
 n_stages = 3.0            # number of turbine stages
 cp = 1148.0               # for hot gas, J/(kg*K)
 gamma = 1.333             # specific heat ratio
@@ -21,10 +21,17 @@ n = 240.0433              # rotational speed, rev/s
 omega = 2*np.pi*n         # rotational speed, rad/s
 a1_inlet = np.radians(0.0)      # inlet relative gas angle, radians
 R = 287                   # J/(kg*k)
+d_T_fan = 319.7229897-288 # fan temp drop, K
 
 f = (cp*T01-1005*T03)/(43100000-cp*T01)
-mdot_f = f*mdot_a         # fuel mass flow, kg/s
-mdot = mdot_a+mdot_f      # total mass flow, kg/s
+mdot_f = f*mdot_core_a         # fuel mass flow, kg/s
+mdot_core = mdot_core_a+mdot_f      # total mass flow, kg/s
+
+# calculate fan work
+wfan = 1005*d_T_fan
+
+w_turb = (mdot_a*wfan+mdot_core_a*w_comp)/(n_m*mdot_core) # J/kg
+
 
 def gas_angles(phi, psi, dor):
     b2 = atan((1/(2*phi))*((psi/2)-2*dor))
@@ -171,11 +178,11 @@ def root_tip(Ca1, Cw2, r_m, omega, gamma, b3, T01, P01, cp, R, mdot):
 
 
 # stage 1 root tip
-Cw2r_s1, C2r_s1, V2r_s1, phi_r_s1, psi_r_s1, dor_r_s1, Cw2t_s1, C2t_s1, V2t_s1, phi_t_s1, psi_t_s1, dor_t_s1, r_r_s1, r_t_s1, a2r_s1, b2r_s1, a2t_s1, b2t_s1 = root_tip(Ca1, Cw2_s1, r_m1_s1, omega, gamma, b3_s1, T01, P01, cp, R, mdot)
+Cw2r_s1, C2r_s1, V2r_s1, phi_r_s1, psi_r_s1, dor_r_s1, Cw2t_s1, C2t_s1, V2t_s1, phi_t_s1, psi_t_s1, dor_t_s1, r_r_s1, r_t_s1, a2r_s1, b2r_s1, a2t_s1, b2t_s1 = root_tip(Ca1, Cw2_s1, r_m1_s1, omega, gamma, b3_s1, T01, P01, cp, R, mdot_core)
 print('stage 1 root tip','\n','\nCw2r_s1:', Cw2r_s1, '\nC2r_s1:',C2r_s1,'\nV2r_s1:', V2r_s1, '\nphi_r_s1:', phi_r_s1, '\npsi_r_s1:', psi_r_s1, '\ndor_r_s1:', dor_r_s1, '\nCw2t_s1:', Cw2t_s1, '\nC2t_s1:',C2t_s1, '\nV2t_s1:', V2t_s1, '\nphi_t_s1:', phi_t_s1, '\npsi_t_s1:', psi_t_s1, '\ndor_t_s1:', dor_t_s1, '\nr_r_s1:', r_r_s1, '\nr_t_s1:', r_t_s1, '\na2r_s1:', np.degrees(a2r_s1), '\nb2r_s1:', np.degrees(b2r_s1), '\na2t_s1:', np.degrees(a2t_s1), '\nb2t_s1:', np.degrees(b2t_s1))
 
 # stage 2 root tip 
-Cw2r_s2, C2r_s2, V2r_s2, phi_r_s2, psi_r_s2, dor_r_s2, Cw2t_s2, C2t_s2, V2t_s2, phi_t_s2, psi_t_s2, dor_t_s2, r_r_s2, r_t_s2, a2r_s2, b2r_s2, a2t_s2, b2t_s2 = root_tip(Ca1, Cw2_s2, r_m2_s2, omega, gamma, b3_s2, T01, P01, cp, R, mdot)
+Cw2r_s2, C2r_s2, V2r_s2, phi_r_s2, psi_r_s2, dor_r_s2, Cw2t_s2, C2t_s2, V2t_s2, phi_t_s2, psi_t_s2, dor_t_s2, r_r_s2, r_t_s2, a2r_s2, b2r_s2, a2t_s2, b2t_s2 = root_tip(Ca1, Cw2_s2, r_m2_s2, omega, gamma, b3_s2, T01, P01, cp, R, mdot_core)
 print('stage 2 root tip','\n','\nCw2r_s2:', Cw2r_s2, '\nC2r_s2:',C2r_s2,'\nV2r_s2:', V2r_s2, '\nphi_r_s2:', phi_r_s2, '\npsi_r_s2:', psi_r_s2, '\ndor_r_s2:', dor_r_s2, '\nCw2t_s2:', Cw2t_s2, '\nC2t_s2:',C2t_s2, '\nV2t_s2:', V2t_s2, '\nphi_t_s2:', phi_t_s2, '\npsi_t_s2:', psi_t_s2, '\ndor_t_s2:', dor_t_s2, '\nr_r_s2:', r_r_s2, '\nr_t_s2:', r_t_s2, '\na2r_s2:', np.degrees(a2r_s2), '\nb2r_s2:', np.degrees(b2r_s2), '\na2t_s2:', np.degrees(a2t_s2), '\nb2t_s2:', np.degrees(b2t_s2))
 
 # need stage 3 root tip
