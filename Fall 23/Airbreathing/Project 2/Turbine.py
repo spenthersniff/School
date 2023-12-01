@@ -190,24 +190,24 @@ def root_tip(Ca1, Cw2, r_m, omega, gamma, b3, T01, P01, cp, R, mdot):
     psi_t = 2*Ca1*(tan(b2t)+tan(b3))/U_t
     dor_t = Ca1*(tan(b3)-tan(b2t))/(2*U_t)
 
-    return Cw2r, C2r, V2r, phi_r, psi_r, dor_r, Cw2t, C2t, V2t, phi_t, psi_t, dor_t, r_r, r_t, a2r, b2r, a2t, b2t, h
+    return Cw2r, C2r, V2r, phi_r, psi_r, dor_r, Cw2t, C2t, V2t, phi_t, psi_t, dor_t, r_r, r_t, a2r, b2r, a2t, b2t, h, U_t, U_r
 
 
 # stage 1 root tip
-Cw2r_s1, C2r_s1, V2r_s1, phi_r_s1, psi_r_s1, dor_r_s1, Cw2t_s1, C2t_s1, V2t_s1, phi_t_s1, psi_t_s1, dor_t_s1, r_r_s1, r_t_s1, a2r_s1, b2r_s1, a2t_s1, b2t_s1, h_s1 = root_tip(Ca1, Cw2_s1, r_m1_s1, omega, gamma, b3_s1, T01, P01, cp, R, mdot_core)
-print('stage 1 root tip','\nCw2r_s1:', Cw2r_s1, '\nC2r_s1:',C2r_s1,'\nV2r_s1:', V2r_s1, '\nphi_r_s1:', phi_r_s1, '\npsi_r_s1:', psi_r_s1, '\ndor_r_s1:', dor_r_s1, '\nCw2t_s1:', Cw2t_s1, '\nC2t_s1:',C2t_s1, '\nV2t_s1:', V2t_s1, '\nphi_t_s1:', phi_t_s1, '\npsi_t_s1:', psi_t_s1, '\ndor_t_s1:', dor_t_s1, '\nr_r_s1:', r_r_s1, '\nr_t_s1:', r_t_s1, '\na2r_s1:', np.degrees(a2r_s1), '\nb2r_s1:', np.degrees(b2r_s1), '\na2t_s1:', np.degrees(a2t_s1), '\nb2t_s1:', np.degrees(b2t_s1),'\n')
+Cw2r_s1, C2r_s1, V2r_s1, phi_r_s1, psi_r_s1, dor_r_s1, Cw2t_s1, C2t_s1, V2t_s1, phi_t_s1, psi_t_s1, dor_t_s1, r_r_s1, r_t_s1, a2r_s1, b2r_s1, a2t_s1, b2t_s1, h_s1, U_t_s1, U_r_s1 = root_tip(Ca1, Cw2_s1, r_m1_s1, omega, gamma, b3_s1, T01, P01, cp, R, mdot_core)
+print('stage 1 root tip','\nCw2r_s1:', Cw2r_s1, '\nC2r_s1:',C2r_s1,'\nV2r_s1:', V2r_s1, '\nphi_r_s1:', phi_r_s1, '\npsi_r_s1:', psi_r_s1, '\ndor_r_s1:', dor_r_s1, '\nCw2t_s1:', Cw2t_s1, '\nC2t_s1:',C2t_s1, '\nV2t_s1:', V2t_s1, '\nphi_t_s1:', phi_t_s1, '\npsi_t_s1:', psi_t_s1, '\ndor_t_s1:', dor_t_s1, '\nr_r_s1:', r_r_s1, '\nr_t_s1:', r_t_s1, '\na2r_s1:', np.degrees(a2r_s1), '\nb2r_s1:', np.degrees(b2r_s1), '\na2t_s1:', np.degrees(a2t_s1), '\nb2t_s1:', np.degrees(b2t_s1), '\nU_t_s1:',U_t_s1,'\nU_r_s1:', U_r_s1,'\n')
 
 # stage 2 root tip 
-Cw2r_s2, C2r_s2, V2r_s2, phi_r_s2, psi_r_s2, dor_r_s2, Cw2t_s2, C2t_s2, V2t_s2, phi_t_s2, psi_t_s2, dor_t_s2, r_r_s2, r_t_s2, a2r_s2, b2r_s2, a2t_s2, b2t_s2, h_s2 = root_tip(Ca1, Cw2_s2, r_m2_s2, omega, gamma, b3_s2, T03_s1, P03_s1, cp, R, mdot_core)
-print('stage 2 root tip','\nCw2r_s2:', Cw2r_s2, '\nC2r_s2:',C2r_s2,'\nV2r_s2:', V2r_s2, '\nphi_r_s2:', phi_r_s2, '\npsi_r_s2:', psi_r_s2, '\ndor_r_s2:', dor_r_s2, '\nCw2t_s2:', Cw2t_s2, '\nC2t_s2:',C2t_s2, '\nV2t_s2:', V2t_s2, '\nphi_t_s2:', phi_t_s2, '\npsi_t_s2:', psi_t_s2, '\ndor_t_s2:', dor_t_s2, '\nr_r_s2:', r_r_s2, '\nr_t_s2:', r_t_s2, '\na2r_s2:', np.degrees(a2r_s2), '\nb2r_s2:', np.degrees(b2r_s2), '\na2t_s2:', np.degrees(a2t_s2), '\nb2t_s2:', np.degrees(b2t_s2),'\n')
+Cw2r_s2, C2r_s2, V2r_s2, phi_r_s2, psi_r_s2, dor_r_s2, Cw2t_s2, C2t_s2, V2t_s2, phi_t_s2, psi_t_s2, dor_t_s2, r_r_s2, r_t_s2, a2r_s2, b2r_s2, a2t_s2, b2t_s2, h_s2, U_t_s2, U_r_s2 = root_tip(Ca1, Cw2_s2, r_m2_s2, omega, gamma, b3_s2, T03_s1, P03_s1, cp, R, mdot_core)
+print('stage 2 root tip','\nCw2r_s2:', Cw2r_s2, '\nC2r_s2:',C2r_s2,'\nV2r_s2:', V2r_s2, '\nphi_r_s2:', phi_r_s2, '\npsi_r_s2:', psi_r_s2, '\ndor_r_s2:', dor_r_s2, '\nCw2t_s2:', Cw2t_s2, '\nC2t_s2:',C2t_s2, '\nV2t_s2:', V2t_s2, '\nphi_t_s2:', phi_t_s2, '\npsi_t_s2:', psi_t_s2, '\ndor_t_s2:', dor_t_s2, '\nr_r_s2:', r_r_s2, '\nr_t_s2:', r_t_s2, '\na2r_s2:', np.degrees(a2r_s2), '\nb2r_s2:', np.degrees(b2r_s2), '\na2t_s2:', np.degrees(a2t_s2), '\nb2t_s2:', np.degrees(b2t_s2), '\nU_t_s2:',U_t_s2,'\nU_r_s2:', U_r_s2,'\n')
 
 # stage 3 root tip
-Cw2r_s3, C2r_s3, V2r_s3, phi_r_s3, psi_r_s3, dor_r_s3, Cw2t_s3, C2t_s3, V2t_s3, phi_t_s3, psi_t_s3, dor_t_s3, r_r_s3, r_t_s3, a2r_s3, b2r_s3, a2t_s3, b2t_s3, h_s3 = root_tip(Ca1, Cw2_s2, r_m2_s3, omega, gamma, b3_s3, T03_s2, P03_s2, cp, R, mdot_core)
-print('stage 3 root tip','\nCw2r_s3:', Cw2r_s3, '\nC2r_s3:',C2r_s3,'\nV2r_s3:', V2r_s3, '\nphi_r_s3:', phi_r_s3, '\npsi_r_s3:', psi_r_s3, '\ndor_r_s3:', dor_r_s3, '\nCw2t_s3:', Cw2t_s3, '\nC2t_s3:',C2t_s3, '\nV2t_s3:', V2t_s3, '\nphi_t_s3:', phi_t_s3, '\npsi_t_s3:', psi_t_s3, '\ndor_t_s3:', dor_t_s3, '\nr_r_s3:', r_r_s3, '\nr_t_s3:', r_t_s3, '\na2r_s3:', np.degrees(a2r_s3), '\nb2r_s3:', np.degrees(b2r_s3), '\na2t_s3:', np.degrees(a2t_s3), '\nb2t_s3:', np.degrees(b2t_s3),'\n')
+Cw2r_s3, C2r_s3, V2r_s3, phi_r_s3, psi_r_s3, dor_r_s3, Cw2t_s3, C2t_s3, V2t_s3, phi_t_s3, psi_t_s3, dor_t_s3, r_r_s3, r_t_s3, a2r_s3, b2r_s3, a2t_s3, b2t_s3, h_s3, U_t_s3, U_r_s3 = root_tip(Ca1, Cw2_s2, r_m2_s3, omega, gamma, b3_s3, T03_s2, P03_s2, cp, R, mdot_core)
+print('stage 3 root tip','\nCw2r_s3:', Cw2r_s3, '\nC2r_s3:',C2r_s3,'\nV2r_s3:', V2r_s3, '\nphi_r_s3:', phi_r_s3, '\npsi_r_s3:', psi_r_s3, '\ndor_r_s3:', dor_r_s3, '\nCw2t_s3:', Cw2t_s3, '\nC2t_s3:',C2t_s3, '\nV2t_s3:', V2t_s3, '\nphi_t_s3:', phi_t_s3, '\npsi_t_s3:', psi_t_s3, '\ndor_t_s3:', dor_t_s3, '\nr_r_s3:', r_r_s3, '\nr_t_s3:', r_t_s3, '\na2r_s3:', np.degrees(a2r_s3), '\nb2r_s3:', np.degrees(b2r_s3), '\na2t_s3:', np.degrees(a2t_s3), '\nb2t_s3:', np.degrees(b2t_s3), '\nU_t_s3:',U_t_s3,'\nU_r_s3:', U_r_s3,'\n')
 
-# stage  root tip
-Cw2r_s4, C2r_s4, V2r_s4, phi_r_s4, psi_r_s4, dor_r_s4, Cw2t_s4, C2t_s4, V2t_s4, phi_t_s4, psi_t_s4, dor_t_s4, r_r_s4, r_t_s4, a2r_s4, b2r_s4, a2t_s4, b2t_s4, h_s4 = root_tip(Ca1, Cw2_s3, r_m4, omega, gamma, b3_s4, T03_s3, P03_s3, cp, R, mdot_core)
-print('stage 3 root tip','\nCw2r_s4:', Cw2r_s4, '\nC2r_s4:',C2r_s4,'\nV2r_s4:', V2r_s4, '\nphi_r_s4:', phi_r_s4, '\npsi_r_s4:', psi_r_s4, '\ndor_r_s4:', dor_r_s4, '\nCw2t_s4:', Cw2t_s4, '\nC2t_s4:',C2t_s4, '\nV2t_s4:', V2t_s4, '\nphi_t_s4:', phi_t_s4, '\npsi_t_s4:', psi_t_s4, '\ndor_t_s4:', dor_t_s4, '\nr_r_s4:', r_r_s4, '\nr_t_s4:', r_t_s4, '\na2r_s4:', np.degrees(a2r_s4), '\nb2r_s4:', np.degrees(b2r_s4), '\na2t_s4:', np.degrees(a2t_s4), '\nb2t_s4:', np.degrees(b2t_s4),'\n')
+# stage 4 root tip
+Cw2r_s4, C2r_s4, V2r_s4, phi_r_s4, psi_r_s4, dor_r_s4, Cw2t_s4, C2t_s4, V2t_s4, phi_t_s4, psi_t_s4, dor_t_s4, r_r_s4, r_t_s4, a2r_s4, b2r_s4, a2t_s4, b2t_s4, h_s4, U_t_s4, U_r_s4 = root_tip(Ca1, Cw2_s3, r_m4, omega, gamma, b3_s4, T03_s3, P03_s3, cp, R, mdot_core)
+print('stage 4 root tip','\nCw2r_s4:', Cw2r_s4, '\nC2r_s4:',C2r_s4,'\nV2r_s4:', V2r_s4, '\nphi_r_s4:', phi_r_s4, '\npsi_r_s4:', psi_r_s4, '\ndor_r_s4:', dor_r_s4, '\nCw2t_s4:', Cw2t_s4, '\nC2t_s4:',C2t_s4, '\nV2t_s4:', V2t_s4, '\nphi_t_s4:', phi_t_s4, '\npsi_t_s4:', psi_t_s4, '\ndor_t_s4:', dor_t_s4, '\nr_r_s4:', r_r_s4, '\nr_t_s4:', r_t_s4, '\na2r_s4:', np.degrees(a2r_s4), '\nb2r_s4:', np.degrees(b2r_s4), '\na2t_s4:', np.degrees(a2t_s4), '\nb2t_s4:', np.degrees(b2t_s4), '\nU_t_s4:',U_t_s4,'\nU_r_s4:', U_r_s4,'\n')
 
 
 print('Stage 1 work = ', w1_s1, '\n','Stage 2 work = ', w2_s2, '\n','Stage 3 work = ', w2_s3, '\n','Stage 4 work = ', w4, '\n')
