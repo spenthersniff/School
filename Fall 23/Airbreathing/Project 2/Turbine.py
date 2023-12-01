@@ -219,17 +219,3 @@ print('Stage 1 psi r = ', psi_r_s1, '\n','Stage 2 psi r = ', psi_r_s2, '\n','Sta
 print('Stage 1 psi t = ', psi_t_s1, '\n','Stage 2 psi t = ', psi_t_s2, '\n','Stage 3 psi t = ', psi_t_s3, '\n','Stage 4 psi t = ', psi_t_s4, '\n')
 print('Stage 1 dor r = ', dor_r_s1, '\n','Stage 2 dor r = ', dor_r_s2, '\n','Stage 3 dor r = ', dor_r_s3, '\n','Stage 4 dor r = ', dor_r_s4, '\n')
 print('Stage 1 dor t = ', dor_t_s1, '\n','Stage 2 dor t = ', dor_t_s2, '\n','Stage 3 dor t = ', dor_t_s3, '\n','Stage 4 dor t = ', dor_t_s4, '\n')
-
-# design lims check
-# phis = [phi_r_s1, phi_t_s1, phi_r_s2, phi_t_s2, phi_r_s3, phi_t_s3, phi_r_s4, phi_t_s4, phi_s4]
-# phiss = ["s1phir", "s1phit", "s2phir", "s2phit", "s3phir", "s3phit", "s4phir", "s4phit", "s4phi"]
-# psis = [psi_r_s1, psi_t_s1, psi_r_s2, psi_t_s2, psi_r_s3, psi_t_s3, psi_r_s4, psi_t_s4, psi_s4]
-# psiss = ["s1psir", "s1psit", "s2psir", "s2psit", "s3psir", "s3psit", "s4psir", "s4psit", "s4psi"]
-# print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-# print("Design Params Check")
-# for k in range(len(phis)):
-#     if phis[k] < 0.78:
-#         print(f"{phiss[k]} = {phis[k]:.3f} (<0.78)")
-#     if psis[k] > 3.3:
-#         print(f"{psiss[k]} = {psis[k]:.2f} (>3.3)")
-# print(w_turb)
