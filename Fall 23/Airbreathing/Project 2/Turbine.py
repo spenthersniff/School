@@ -174,7 +174,7 @@ def root_tip(Ca1, Cw2, r_m, omega, gamma, b3, T01, P01, cp, R, mdot):
     psi_t = 2*Ca1*(tan(b2t)+tan(b3))/U_t
     dor_t = Ca1*(tan(b3)-tan(b2t))/(2*U_t)
 
-    return Cw2t, C2r, V2r, phi_r, psi_r, dor_r, Cw2t, C2t, V2t, phi_t, psi_t, dor_t, r_r, r_t, a2r, b2r, a2t, b2t
+    return Cw2r, C2r, V2r, phi_r, psi_r, dor_r, Cw2t, C2t, V2t, phi_t, psi_t, dor_t, r_r, r_t, a2r, b2r, a2t, b2t
 
 
 # stage 1 root tip
@@ -186,3 +186,5 @@ Cw2r_s2, C2r_s2, V2r_s2, phi_r_s2, psi_r_s2, dor_r_s2, Cw2t_s2, C2t_s2, V2t_s2, 
 print('stage 2 root tip','\n','\nCw2r_s2:', Cw2r_s2, '\nC2r_s2:',C2r_s2,'\nV2r_s2:', V2r_s2, '\nphi_r_s2:', phi_r_s2, '\npsi_r_s2:', psi_r_s2, '\ndor_r_s2:', dor_r_s2, '\nCw2t_s2:', Cw2t_s2, '\nC2t_s2:',C2t_s2, '\nV2t_s2:', V2t_s2, '\nphi_t_s2:', phi_t_s2, '\npsi_t_s2:', psi_t_s2, '\ndor_t_s2:', dor_t_s2, '\nr_r_s2:', r_r_s2, '\nr_t_s2:', r_t_s2, '\na2r_s2:', np.degrees(a2r_s2), '\nb2r_s2:', np.degrees(b2r_s2), '\na2t_s2:', np.degrees(a2t_s2), '\nb2t_s2:', np.degrees(b2t_s2))
 
 # need stage 3 root tip
+Cw2r_s3, C2r_s3, V2r_s3, phi_r_s3, psi_r_s3, dor_r_s3, Cw2t_s3, C2t_s3, V2t_s3, phi_t_s3, psi_t_s3, dor_t_s3, r_r_s3, r_t_s3, a2r_s3, b2r_s3, a2t_s3, b2t_s3 = root_tip(Ca1, Cw2_s2, r_m3, omega, gamma, b3_s3, T01, P01, cp, R, mdot_core)
+print('stage 3 root tip','\n','\nCw2r_s3:', Cw2r_s3, '\nC2r_s3:',C2r_s3,'\nV2r_s3:', V2r_s3, '\nphi_r_s3:', phi_r_s3, '\npsi_r_s3:', psi_r_s3, '\ndor_r_s3:', dor_r_s3, '\nCw2t_s3:', Cw2t_s3, '\nC2t_s3:',C2t_s3, '\nV2t_s3:', V2t_s3, '\nphi_t_s3:', phi_t_s3, '\npsi_t_s3:', psi_t_s3, '\ndor_t_s3:', dor_t_s3, '\nr_r_s3:', r_r_s3, '\nr_t_s3:', r_t_s3, '\na2r_s3:', np.degrees(a2r_s3), '\nb2r_s3:', np.degrees(b2r_s3), '\na2t_s3:', np.degrees(a2t_s3), '\nb2t_s3:', np.degrees(b2t_s3))
